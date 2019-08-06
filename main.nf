@@ -8,7 +8,7 @@ spectra = file(params.spectra)
 
 
 process indexPeptides {
-    container 'ypriverol/crux:3.2'
+    container 'omicsdi/crux:3.4'
     publishDir "data/"
     
     input:
@@ -27,7 +27,7 @@ process indexPeptides {
 }
 
 process postProcess {
-    container 'containers.biocontainers.pro/biocontainers/crux:v2.1_cv2.588'
+    container 'omicsdi/crux:3.4'
 
     input:
     file 'search.target.txt' from searchResults        
@@ -45,5 +45,4 @@ process postProcess {
 percResults.subscribe { results ->
     results.copyTo('./data/results.txt')
     println "Final results at: results.txt"
-    
 }

@@ -7,7 +7,8 @@ peptides = file(params.peptides)
 spectra = file(params.spectra)
 
 
-process indexPeptides {        
+process indexPeptides {  
+    container 'omicsdi/crux:latest'      
     publishDir "data/"
     
     input:
@@ -26,6 +27,7 @@ process indexPeptides {
 }
 
 process postProcess {    
+    container 'omicsdi/crux:latest'      
     input:
     file 'search.target.txt' from searchResults        
     file 'search.decoy.txt' from decoyResults

@@ -1,7 +1,7 @@
 #!/usr/bin/env nextflow
 
-params.peptides = 'data/small-yeast.fasta'
-params.spectra = 'data/demo.ms2'
+params.peptides = '$baseDir/data/small-yeast.fasta'
+params.spectra = '$baseDir/data/demo.ms2'
 
 peptides = file(params.peptides)
 spectra = file(params.spectra)

@@ -8,7 +8,7 @@ spectra = file(params.spectra)
 
 
 process indexPeptides {  
-    pod = [[runAsUser: 2801], [imagePullPolicy: 'Always']]
+    
     container 'omicsdi/crux:latest'
     publishDir "data/"
     
@@ -28,7 +28,7 @@ process indexPeptides {
 }
 
 process postProcess {    
-    pod = [[runAsUser: 2801], [imagePullPolicy: 'Always']]
+    
     container 'omicsdi/crux:latest'
     input:
     file 'search.target.txt' from searchResults        

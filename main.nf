@@ -1,7 +1,7 @@
 #!/usr/bin/env nextflow
 
-params.peptides = '$baseDir/data/small-yeast.fasta'
-params.spectra = '$baseDir/data/demo.ms2'
+params.peptides = "$baseDir/data/small-yeast.fasta"
+params.spectra = "$baseDir/data/demo.ms2"
 
 peptides = file(params.peptides)
 spectra = file(params.spectra)
@@ -9,12 +9,12 @@ spectra = file(params.spectra)
 
 process indexPeptides {  
     
-    container 'omicsdi/crux:latest'
-    publishDir "data/"
+    container 'omicsdi/crux:latest'   
+    publishDir "$baseDir/data/" 
     
     input:
-    file 'small-yeast.fasta' from peptides
-    file 'demo.ms2' from spectra
+    file small_yeast from peptides
+    file demo_ms2 from spectra
 
     output:
     file 'crux-output/tide-search.target.txt' into searchResults
@@ -22,8 +22,8 @@ process indexPeptides {
 
     script:
     """
-    crux tide-index small-yeast.fasta yeast-index
-    crux tide-search --compute-sp T --mzid-output T demo.ms2 yeast-index
+    crux tide-index $small_yeast yeast-index
+    crux tide-search --compute-sp T --mzid-output T $demo_ms2 yeast-index
     """
 }
 
@@ -44,6 +44,6 @@ process postProcess {
 }
 
 percResults.subscribe { results ->
-    results.copyTo('./data/results.txt')
+    results.copyTo("$baseDir/data/results.txt")
     println "Final results at: results.txt"
 }

@@ -44,6 +44,6 @@ process postProcess {
 }
 
 percResults.subscribe { results ->
-    results.copyTo("s3:/pride/data/results.txt")
+    results.copyTo("s3://caas-omicsdi/pride/data/results.txt")
     println "Final results at: results.txt"
 }

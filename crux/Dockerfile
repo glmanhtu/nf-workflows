@@ -24,16 +24,10 @@ MAINTAINER Felipe da Veiga Leprevost <felipe@leprevost.com.br>
 
 ################## INSTALLATION ######################
 
-RUN mkdir /biodocker
-
 RUN ZIP=crux-2.1.Linux.x86_64.zip && \
   wget https://github.com/BioDocker/software-archive/releases/download/Crux/$ZIP -O /tmp/$ZIP && \
-  unzip /tmp/$ZIP -d /biodocker/bin/ && \
+  unzip /tmp/$ZIP -d /usr/local/crux/ && \
   rm /tmp/$ZIP && \
-  ln -sv /biodocker/bin/*/bin/* /biodocker/bin/
-
-RUN cd /biodocker/bin/ && wget -qO- https://get.nextflow.io | bash
-
-ENV PATH /biodocker/bin:$PATH
+  ln -sv /usr/local/crux/*/bin/* /usr/local/bin/
 
 WORKDIR /data/

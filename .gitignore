@@ -1,2 +1,4 @@
 .nextflow*
 work
+data/crux-output
+data/results.txt
